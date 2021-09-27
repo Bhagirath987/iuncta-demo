@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.demo.mobile.app.ui.main.profile.HomeActivityVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingVertical="@dimen/_70sdp">
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/hello"
+            app:layout_constraintBottom_toTopOf="@id/tvRegistration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRegistration"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/registration"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintBottom_toTopOf="@id/tvLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/login"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintBottom_toTopOf="@id/tvLoginKey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRegistration" />
+
+        <TextView
+            android:id="@+id/tvLoginKey"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/login_key"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintBottom_toTopOf="@id/tvLoginToken"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLogin" />
+
+        <TextView
+            android:id="@+id/tvLoginToken"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/login_token"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintBottom_toTopOf="@id/tvPayment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginKey" />
+
+        <TextView
+            android:id="@+id/tvPayment"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/payment"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginToken" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

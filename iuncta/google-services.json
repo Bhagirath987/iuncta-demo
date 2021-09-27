@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "656800901382",
+    "firebase_url": "https://shipomatic-4211d.firebaseio.com",
+    "project_id": "shipomatic-4211d",
+    "storage_bucket": "shipomatic-4211d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656800901382:android:a95e63cc3feb353baf5687",
+        "android_client_info": {
+          "package_name": "com.shipo.matic.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656800901382-qmq94atg9ng5lfmavr4j1jj7neplnnr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmDX9rrL5SqBM3_Fj0l5swN_3HrNAYKRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656800901382-qmq94atg9ng5lfmavr4j1jj7neplnnr8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

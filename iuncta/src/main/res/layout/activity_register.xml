@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.demo.mobile.app.ui.welcome.section.register.RegisterActivityVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvBack"
+            style="@style/TextView.14x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:elevation="1dp"
+            android:onClick="@{(v)->vm.onClick(v)}"
+            android:text="@string/back"
+            android:textColor="@color/blue_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cnsCommonHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBack">
+
+            <EditText
+                android:id="@+id/edtUsername"
+                style="@style/TextView.12x"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@drawable/bg_border"
+                android:hint="@string/enter_username"
+                android:imeOptions="actionDone"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_6sdp"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/quantum_grey"
+                app:layout_constraintEnd_toStartOf="@id/imgSubmit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgSubmit"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:contentDescription="@string/app_name"
+                android:onClick="@{(v)->vm.onClick(v)}"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edtUsername"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/crdPaymentHolder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_80sdp"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/cnsCommonHolder">
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.95" />
+
+
+                <EditText
+                    android:id="@+id/edUserName"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="@string/enter_username"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="batman"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <EditText
+                    android:id="@+id/edProductId"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product id"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="123"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edUserName" />
+
+
+                <EditText
+                    android:id="@+id/edProductName"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Name"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="Play Station 5"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edProductId" />
+
+
+                <EditText
+                    android:id="@+id/edProductDescription"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Description"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="Play Station 5 white color with 2 controller"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edProductName" />
+
+
+                <EditText
+                    android:id="@+id/edProductPrice"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Price"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="59000"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edProductDescription" />
+
+
+                <EditText
+                    android:id="@+id/edProducyDisscount"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Disscount"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="10"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edProductPrice" />
+
+
+                <EditText
+                    android:id="@+id/edFinalAmmount"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Final Amount"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="10"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edProducyDisscount" />
+
+
+                <EditText
+                    android:id="@+id/edSsubTotal"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Sub Total"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="120"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edFinalAmmount" />
+
+
+                <EditText
+                    android:id="@+id/edTaxAmmount"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Tax  Amount"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="120"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edSsubTotal" />
+
+
+                <EditText
+                    android:id="@+id/edTotalAmmount"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Product Total Amount"
+                    android:imeOptions="actionNext"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="60000"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edTaxAmmount" />
+
+
+                <EditText
+                    android:id="@+id/edOrderId"
+                    style="@style/TextView.12x"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10ssp"
+                    android:background="@drawable/bg_border"
+                    android:hint="Enter Order id"
+                    android:imeOptions="actionDone"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:text="111223"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/quantum_grey"
+                    app:layout_constraintEnd_toStartOf="@+id/imgPaymentSubmit"
+                    app:layout_constraintStart_toStartOf="@+id/guidEnd"
+                    app:layout_constraintTop_toBottomOf="@+id/edTotalAmmount" />
+
+                <ImageView
+                    android:id="@+id/imgPaymentSubmit"
+                    android:layout_width="@dimen/_23sdp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="@{(v)->vm.onClick(v)}"
+                    android:src="@drawable/logo"
+                    app:layout_constraintBottom_toBottomOf="@+id/edOrderId"
+                    app:layout_constraintEnd_toStartOf="@+id/guidStart"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@id/imgPaymentSubmit"
+                    app:layout_constraintTop_toTopOf="@+id/edOrderId" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.05" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
