@@ -10,11 +10,51 @@
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start service"
+        android:text="Create Toekm"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="key"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
+
+    <Button
+        android:id="@+id/btnLoginWithKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with key"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edKey" />
+
+
+    <EditText
+        android:id="@+id/edToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Token"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginWithKey" />
+
+    <Button
+        android:id="@+id/btnToken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login with Token"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edToken" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
