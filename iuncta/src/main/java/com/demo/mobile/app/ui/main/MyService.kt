@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import com.demo.mobile.app.data.beans.AccessTokenResponse
-import com.demo.mobile.app.data.beans.Constants
-import com.demo.mobile.app.data.beans.VerifyTokenResponse
+import com.demo.mobile.app.data.beans.*
 import com.demo.mobile.app.data.remote.helper.ApiCallback
 import com.demo.mobile.app.data.repo.welcome.WelcomeRepo
 import com.demo.mobile.app.ui.main.callback.CreateTokenCallBack
@@ -19,7 +17,6 @@ import javax.inject.Inject
 
 
 public class MyService : DaggerService() {
-
     @JvmField
     @Inject
     var welcomeRepo: WelcomeRepo? = null
@@ -141,6 +138,65 @@ public class MyService : DaggerService() {
 
                     }
                 })
+            return this@MyService
+        }
+
+
+        fun simpleLogin(
+            userName: String,
+            userToken: String,
+            simpleLoginCallback: LoginWithKeyCallBack
+        ): MyService {
+            val rqMap: MutableMap<String, String> = HashMap()
+            rqMap["username"] = userName
+            rqMap["secretkey"] = Constants.KEY.SECRET_KEY
+            rqMap["login_type"] = "2"
+            rqMap["request_json"] = "full_name,gender,birthdate,phone_number,email,website,profile_picture,address,country"
+
+            welcomeRepo?.requestUserVerify("Bearer $userToken", rqMap, object : ApiCallback<Response<RegisterResponse>>() {
+                override fun onSuccess(response: Response<RegisterResponse>) {
+                    simpleLoginCallback.onSuccess(response.body()?.data.toString())
+                }
+
+                override fun onFailed(message: String) {
+                    simpleLoginCallback.onFail(message)
+                }
+
+                override fun onErrorThrow(exception: Exception) {
+                    simpleLoginCallback.onFail("" + exception.message)
+                }
+
+                override fun onLoading() {
+
+                }
+            })
+            return this@MyService
+        }
+
+
+        fun getRequestData(
+            send_token: String,
+            userToken: String,
+            simpleLoginCallback: LoginWithKeyCallBack
+        ): MyService {
+            val rqMap: MutableMap<String, String> = HashMap()
+            rqMap["send_request"] = send_token
+            welcomeRepo?.getRequest("Bearer $userToken", rqMap, object : ApiCallback<Response<GetRequestResponse>>() {
+                override fun onSuccess(response: Response<GetRequestResponse>) {
+                    simpleLoginCallback.onSuccess(response.body()?.data.toString())
+                }
+
+                override fun onFailed(message: String) {
+                    simpleLoginCallback.onFail(message)
+                }
+
+                override fun onErrorThrow(exception: Exception) {
+                    simpleLoginCallback.onFail("" + exception.message)
+                }
+
+                override fun onLoading() {
+                }
+            })
             return this@MyService
         }
     }

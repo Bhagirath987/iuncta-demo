@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initIuncta()
         btnStart.setOnClickListener {
             initIuncta()
         }
@@ -32,12 +33,43 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnToken.setOnClickListener {
-            iuncta?.loginWithToken(edToken.text.toString(), this)
+            iuncta?.loginWithToken(edToken.text.toString(), this, object : LoginWithKeyCallBack {
+                override fun onSuccess(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFail(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+
+        btnLogin.setOnClickListener {
+            iuncta?.simpleLogin(edUserName.text.toString(), this, object : LoginWithKeyCallBack {
+                override fun onSuccess(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFail(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+        btnCheckData.setOnClickListener {
+            iuncta?.simpleLogin(edUserName.text.toString(), this, object : LoginWithKeyCallBack {
+                override fun onSuccess(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onFail(msg: String) {
+                    Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                }
+            })
         }
     }
 
     fun initIuncta() {
-        iuncta = Iuncta()
+        iuncta = Iuncta(this)
         iuncta!!.setSecret(
             "ahVLpSF17k",
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ImFoVkxwU0YxN2si.Nu0gbkzHJVKBFyLSXVhXnErZzI3HzhaX5bSRds97AzA",

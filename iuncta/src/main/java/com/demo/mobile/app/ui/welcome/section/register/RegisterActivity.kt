@@ -21,7 +21,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM>() {
-
     private var type: Int = 0
     var sendRequest = ""
 
