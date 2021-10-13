@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import android.util.Log
 import com.demo.mobile.app.data.beans.Constants
+import com.demo.mobile.app.data.beans.GetRequestData
 import com.demo.mobile.app.ui.main.MyService
 import com.demo.mobile.app.ui.main.callback.CreateTokenCallBack
 import com.demo.mobile.app.ui.main.callback.LoginWithKeyCallBack
@@ -23,13 +24,17 @@ class Iuncta(context: Context) {
     var loginWithKeyCallBack: LoginWithKeyCallBack? = null
     var loginWithTokenCallback: LoginWithKeyCallBack? = null
     var simpleLoginRequest: LoginWithKeyCallBack? = null
+    var requestDataCallback: LoginWithKeyCallBack? = null
+    var registerRequest: LoginWithKeyCallBack? = null
     var getRequestDataCallBack: LoginWithKeyCallBack? = null
     var context: Context? = context
     var userIntent: Intent? = null
     var bindSimpleLogin = false
+    var bindRegistration = false
     var bindRequestData = false
     var bindLoginWithKeyValue = false
     var loginWithTokenValue = false
+    var getRequestDataValue = false
 
     init {
         userIntent = Intent(context, MyService::class.java)
@@ -93,18 +98,25 @@ class Iuncta(context: Context) {
         bindSimpleLogin = context.bindService(userIntent, simpleLogin, Context.BIND_AUTO_CREATE)
     }
 
-
-
-    fun getRequestData(userName: String, context: Context, simpleLoginRequest: LoginWithKeyCallBack) {
-        this.simpleLoginRequest = simpleLoginRequest
+    fun sendRegistrationRequest(userName: String, context: Context, registerRequest: LoginWithKeyCallBack) {
+        this.registerRequest = registerRequest
         this.userName = userName
-        if (bindSimpleLogin) {
-            context.unbindService(getRequestData)
-            bindRequestData = false
+        if (bindRegistration) {
+            context.unbindService(registrationRequest)
+            bindRegistration = false
         }
-        bindRequestData = context.bindService(userIntent, getRequestData, Context.BIND_AUTO_CREATE)
+        bindRegistration = context.bindService(userIntent, registrationRequest, Context.BIND_AUTO_CREATE)
     }
 
+    fun getRequestData(userTokenForGettingData: String, context: Context, requestDataCallback: LoginWithKeyCallBack) {
+        this.requestDataCallback = requestDataCallback
+        this.userTokenForGettingData = userTokenForGettingData
+        if (getRequestDataValue) {
+            context.unbindService(getRequestData)
+            getRequestDataValue = false
+        }
+        getRequestDataValue = context.bindService(userIntent, getRequestData, Context.BIND_AUTO_CREATE)
+    }
 
     private val createToken: ServiceConnection = object : ServiceConnection {
 
@@ -194,7 +206,6 @@ class Iuncta(context: Context) {
         }
     }
 
-
     private var getRequestData: ServiceConnection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName) {
             mServiceBound = false
@@ -202,13 +213,40 @@ class Iuncta(context: Context) {
 
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             val myBinder: MyService.MyBinder = service as MyService.MyBinder
-            mBoundService = myBinder.getRequestData(userName, userToken, object : LoginWithKeyCallBack {
+            mBoundService = myBinder.getRequestData(userTokenForGettingData, userToken, object : LoginWithKeyCallBack {
                 override fun onSuccess(msg: String) {
-                    simpleLoginRequest?.onSuccess(msg)
+                    requestDataCallback?.onSuccess(msg)
                 }
 
                 override fun onFail(msg: String) {
-                    simpleLoginRequest?.onFail(msg)
+                    requestDataCallback?.onFail(msg)
+                }
+
+                override fun getData(data: GetRequestData) {
+                    super.getData(data)
+                    requestDataCallback?.getData(data)
+                }
+            })
+            mServiceBound = true
+        }
+    }
+
+    private var registrationRequest: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+            mServiceBound = false
+        }
+
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            val myBinder: MyService.MyBinder = service as MyService.MyBinder
+            mBoundService = myBinder.registerRequest(userName, userToken, object : LoginWithKeyCallBack {
+                override fun onSuccess(msg: String) {
+                    Log.e(">>>> loginWithToken", "onSuccess: " + msg)
+                    registerRequest?.onSuccess(msg)
+                }
+
+                override fun onFail(msg: String) {
+                    Log.e(">>>> loginWithToken", "onFail: " + msg)
+                    registerRequest?.onFail(msg)
 
                 }
             })

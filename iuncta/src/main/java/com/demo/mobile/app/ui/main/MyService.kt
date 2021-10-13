@@ -155,7 +155,37 @@ public class MyService : DaggerService() {
 
             welcomeRepo?.requestUserVerify("Bearer $userToken", rqMap, object : ApiCallback<Response<RegisterResponse>>() {
                 override fun onSuccess(response: Response<RegisterResponse>) {
-                    simpleLoginCallback.onSuccess(response.body()?.data.toString())
+                    simpleLoginCallback.onSuccess("" + response.body()?.data?.sendRequest)
+                }
+
+                override fun onFailed(message: String) {
+                    simpleLoginCallback.onFail(message)
+                }
+
+                override fun onErrorThrow(exception: Exception) {
+                    simpleLoginCallback.onFail("" + exception.message)
+                }
+
+                override fun onLoading() {
+
+                }
+            })
+            return this@MyService
+        }
+
+        fun registerRequest(
+            userName: String,
+            userToken: String,
+            simpleLoginCallback: LoginWithKeyCallBack
+        ): MyService {
+            val rqMap: MutableMap<String, String> = HashMap()
+            rqMap["username"] = userName
+            rqMap["secretkey"] = Constants.KEY.SECRET_KEY
+            rqMap["login_type"] = "1"
+            rqMap["request_json"] = "full_name,gender,birthdate,phone_number,email,website,profile_picture,address,country"
+            welcomeRepo?.requestUserVerify("Bearer $userToken", rqMap, object : ApiCallback<Response<RegisterResponse>>() {
+                override fun onSuccess(response: Response<RegisterResponse>) {
+                    simpleLoginCallback.onSuccess("" + response.body()?.data?.sendRequest)
                 }
 
                 override fun onFailed(message: String) {
@@ -183,7 +213,8 @@ public class MyService : DaggerService() {
             rqMap["send_request"] = send_token
             welcomeRepo?.getRequest("Bearer $userToken", rqMap, object : ApiCallback<Response<GetRequestResponse>>() {
                 override fun onSuccess(response: Response<GetRequestResponse>) {
-                    simpleLoginCallback.onSuccess(response.body()?.data.toString())
+                    simpleLoginCallback.onSuccess("${response.body()?.message}")
+                    response.body()?.data?.let { simpleLoginCallback.getData(it) }
                 }
 
                 override fun onFailed(message: String) {

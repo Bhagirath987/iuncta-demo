@@ -88,4 +88,33 @@
         app:layout_constraintTop_toBottomOf="@+id/edUserName" />
 
 
+    <EditText
+        android:id="@+id/edRegistration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter user name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheckData" />
+
+
+
+    <Button
+        android:id="@+id/btnSendRegistrationRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Request"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edRegistration" />
+
+    <Button
+        android:id="@+id/btnCheckRegistrationData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Data"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edRegistration" />
 </androidx.constraintlayout.widget.ConstraintLayout>
