@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import com.demo.mobile.app.data.beans.Constants
 import com.demo.mobile.app.data.beans.GetRequestData
+import com.demo.mobile.app.data.beans.RegisterResponse
 import com.demo.mobile.app.ui.main.MyService
 import com.demo.mobile.app.ui.main.callback.CreateTokenCallBack
 import com.demo.mobile.app.ui.main.callback.LoginWithKeyCallBack
@@ -26,22 +27,23 @@ class Iuncta(context: Context) {
     var simpleLoginRequest: LoginWithKeyCallBack? = null
     var requestDataCallback: LoginWithKeyCallBack? = null
     var registerRequest: LoginWithKeyCallBack? = null
-    var getRequestDataCallBack: LoginWithKeyCallBack? = null
+    var paymentCallBack: LoginWithKeyCallBack? = null
     var context: Context? = context
     var userIntent: Intent? = null
     var bindSimpleLogin = false
     var bindRegistration = false
-    var bindRequestData = false
+    var bindPayment = false
     var bindLoginWithKeyValue = false
     var loginWithTokenValue = false
     var getRequestDataValue = false
+    var bindcreateToken = false
+    var paymentData: PaymentRequestData = PaymentRequestData()
 
     init {
         userIntent = Intent(context, MyService::class.java)
         context.startService(userIntent)
     }
 
-    var bindcreateToken = false
 
 
     fun setSecret(
@@ -116,6 +118,17 @@ class Iuncta(context: Context) {
             getRequestDataValue = false
         }
         getRequestDataValue = context.bindService(userIntent, getRequestData, Context.BIND_AUTO_CREATE)
+    }
+
+    fun sendPaymentRequest(userName: String, paymentData: PaymentRequestData, context: Context, paymentCallBack: LoginWithKeyCallBack) {
+        this.paymentCallBack = paymentCallBack
+        this.paymentData = paymentData
+        this.userName = userName
+        if (bindPayment) {
+            context.unbindService(paymentRequest)
+            bindPayment = false
+        }
+        bindPayment = context.bindService(userIntent, paymentRequest, Context.BIND_AUTO_CREATE)
     }
 
     private val createToken: ServiceConnection = object : ServiceConnection {
@@ -254,4 +267,30 @@ class Iuncta(context: Context) {
         }
     }
 
+    private var paymentRequest: ServiceConnection = object : ServiceConnection {
+        override fun onServiceDisconnected(name: ComponentName) {
+            mServiceBound = false
+        }
+
+        override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            val myBinder: MyService.MyBinder = service as MyService.MyBinder
+            mBoundService = myBinder.sendPayment(userToken, paymentData, object : LoginWithKeyCallBack {
+                override fun onSuccess(msg: String) {
+                    Log.e(">>>> loginWithToken", "onSuccess: " + msg)
+                    paymentCallBack?.onSuccess(msg)
+                }
+
+                override fun onFail(msg: String) {
+                    Log.e(">>>> loginWithToken", "onFail: " + msg)
+                    paymentCallBack?.onFail(msg)
+                }
+
+                override fun getPaymentResponse(data: RegisterResponse) {
+                    super.getPaymentResponse(data)
+                    Log.e(">>>>", "getPaymentResponse: " + data)
+                }
+            })
+            mServiceBound = true
+        }
+    }
 }

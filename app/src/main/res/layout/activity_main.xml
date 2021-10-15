@@ -98,8 +98,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCheckData" />
 
-
-
     <Button
         android:id="@+id/btnSendRegistrationRequest"
         android:layout_width="wrap_content"
@@ -117,4 +115,34 @@
         android:textAllCaps="false"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edRegistration" />
+
+
+    <EditText
+        android:id="@+id/edPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Payment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCheckRegistrationData" />
+
+    <Button
+        android:id="@+id/btnSendPaymentRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Request"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPayment" />
+
+
+    <Button
+        android:id="@+id/btnCheckPaymentData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Data"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPayment" />
 </androidx.constraintlayout.widget.ConstraintLayout>

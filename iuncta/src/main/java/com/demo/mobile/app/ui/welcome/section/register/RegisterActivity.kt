@@ -39,7 +39,7 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
 
         vm.obrClick.observe(this, {
             when (it.id) {
-               R.id.tvBack  -> {
+                R.id.tvBack -> {
                     onBackPressed()
                 }
                 R.id.imgSubmit -> {
@@ -72,7 +72,7 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
 
 
 
-
+//sticky intent
 
 
 
@@ -141,7 +141,7 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
         vm.obrGetRequest.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
-                 //   showProgressDialog(R.string.plz_wait)
+                    //   showProgressDialog(R.string.plz_wait)
                 }
                 Status.SUCCESS -> {
                     dismissProgressDialog()
@@ -154,14 +154,14 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
                 }
                 Status.ERROR -> {
                     dismissProgressDialog()
-                    if(it.message != "Your request is pending."){
+                    if (it.message != "Your request is pending.") {
                         vm.error.value = it.message
                     }
-                    if(it.message != "Your request was denied."){
+                    if (it.message != "Your request was denied.") {
                         Handler(Looper.myLooper()!!).postDelayed(Runnable {
                             getRequestApi(sendRequest)
                         }, 2000)
-                    }else{
+                    } else {
                         vm.error.value = it.message
                     }
 
@@ -190,8 +190,6 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
                 }
             }
         })
-
-
 
 
     }
@@ -243,21 +241,6 @@ class RegisterActivity : AppActivity<ActivityRegisterBinding, RegisterActivityVM
         } else if (isEmpty(binding.edOrderId.text.toString())) {
             viewModel.warn.value = "Please enter Order Id";
         } else {
-            val rqMap: MutableMap<String, String> = HashMap()
-            rqMap["secretkey"] = "ahVLpSF17k"
-            rqMap["login_type"] = type.toString()
-            rqMap["username"] = binding.edUserName.text.toString()
-            rqMap["order_id"] = binding.edOrderId.text.toString()
-            rqMap["tax_amount"] = binding.edTaxAmmount.text.toString()
-            rqMap["sub_total"] = binding.edSsubTotal.text.toString()
-            rqMap["total_amount"] = binding.edTotalAmmount.text.toString()
-            rqMap["purchase[0][title]"] = binding.edUserName.text.toString()
-            rqMap["purchase[0][product_id]"] = binding.edProductId.text.toString()
-            rqMap["purchase[0][description]"] = binding.edProductDescription.text.toString()
-            rqMap["purchase[0][amount]"] = binding.edTotalAmmount.text.toString()
-            rqMap["purchase[0][discount]"] = binding.edProducyDisscount.text.toString()
-            rqMap["purchase[0][final_amount]"] = binding.edFinalAmmount.text.toString()
-//            viewModel.register("Bearer " + Prefs.getString(Constants.PrefsKeys.AUTHENTICATION, "").replace("\"", ""), rqMap)
             var purchaseData = ArrayList<PurchaseData>()
             purchaseData.add(
                 PurchaseData(

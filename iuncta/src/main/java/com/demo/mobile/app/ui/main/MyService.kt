@@ -9,6 +9,7 @@ import com.demo.mobile.app.data.remote.helper.ApiCallback
 import com.demo.mobile.app.data.repo.welcome.WelcomeRepo
 import com.demo.mobile.app.ui.main.callback.CreateTokenCallBack
 import com.demo.mobile.app.ui.main.callback.LoginWithKeyCallBack
+import com.demo.mobile.app.ui.main.profile.PaymentRequestData
 import com.demo.mobile.app.ui.main.profile.Request
 import dagger.android.DaggerService
 import retrofit2.Response
@@ -227,6 +228,35 @@ public class MyService : DaggerService() {
 
                 override fun onLoading() {
                 }
+            })
+            return this@MyService
+        }
+
+        fun sendPayment(
+            send_token: String,
+            userData: PaymentRequestData,
+            simpleLoginCallback: LoginWithKeyCallBack
+        ): MyService {
+            welcomeRepo?.requestUserVerifyForPayment("Bearer $send_token", userData, object : ApiCallback<Response<RegisterResponse>>() {
+                override fun onSuccess(response: Response<RegisterResponse>) {
+                    simpleLoginCallback.onSuccess("" + response.body()?.data?.sendRequest)
+                    simpleLoginCallback.getPaymentResponse(response.body()!!)
+
+                }
+
+                override fun onFailed(message: String) {
+                    simpleLoginCallback.onFail(message)
+                }
+
+                override fun onErrorThrow(exception: Exception) {
+                    simpleLoginCallback.onFail("" + exception.message)
+
+                }
+
+                override fun onLoading() {
+                }
+
+
             })
             return this@MyService
         }
