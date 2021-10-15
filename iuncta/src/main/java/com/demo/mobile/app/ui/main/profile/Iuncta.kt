@@ -77,9 +77,9 @@ class Iuncta(context: Context) {
         bindLoginWithKeyValue = context.bindService(i, loginWithKey, Context.BIND_AUTO_CREATE);
     }
 
-    fun loginWithToken(key: String, context: Context, loginWithKeyCallBack: LoginWithKeyCallBack) {
+    fun loginWithToken(token: String, context: Context, loginWithKeyCallBack: LoginWithKeyCallBack) {
         this.loginWithTokenCallback = loginWithKeyCallBack
-        this.key = key
+        this.key = token
         val i = Intent(context, MyService::class.java)
 
         if (loginWithTokenValue) {

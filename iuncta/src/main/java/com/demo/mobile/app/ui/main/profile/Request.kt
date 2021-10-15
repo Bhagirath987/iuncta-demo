@@ -27,28 +27,28 @@ data class PaymentRequestItem(
     var title: String? = ""
 )
 
-data class PaymentRequestData(
-    @SerializedName("login_type")
-    var loginType: String? = "",
-    @SerializedName("order_id")
-    var orderId: String? = "",
-    @SerializedName("purchase")
-    var purchaseData: List<PurchaseData>? = listOf(),
-    @SerializedName("request_json")
-    var requestJson: String? = "",
-    @SerializedName("secretkey")
-    var secretkey: String? = "",
-    @SerializedName("secrettoken")
-    var secrettoken: String? = "",
-    @SerializedName("sub_total")
-    var subTotal: String? = "",
-    @SerializedName("tax_amount")
-    var taxAmount: String? = "",
-    @SerializedName("total_amount")
-    var totalAmount: String? = "",
-    @SerializedName("username")
-    var username: String? = ""
-)
+    data class PaymentRequestData(
+        @SerializedName("login_type")
+        var loginType: String? = "",
+        @SerializedName("order_id")
+        var orderId: String? = "",
+        @SerializedName("purchase")
+        var purchaseData: List<PurchaseData>? = listOf(),
+        @SerializedName("request_json")
+        var requestJson: String? = "",
+        @SerializedName("secretkey")
+        var secretkey: String? = "",
+        @SerializedName("secrettoken")
+        var secrettoken: String? = "",
+        @SerializedName("sub_total")
+        var subTotal: String? = "",
+        @SerializedName("tax_amount")
+        var taxAmount: String? = "",
+        @SerializedName("total_amount")
+        var totalAmount: String? = "",
+        @SerializedName("username")
+        var username: String? = ""
+    )
 
 data class PurchaseData(
     @SerializedName("amount")
